@@ -10,10 +10,10 @@ import (
 )
 
 func TestClock(t *testing.T) {
-	rate := 15 * time.Millisecond
+	rate := 5 * time.Millisecond
 	var wg sync.WaitGroup
 	var total atomic.Int64
-	var loops, hoops int64 = 500, 500 // runs 500 times, raises 500 listener each time
+	var loops, hoops int64 = 500, 1000 // runs 500 times, raises 1000 listener each time
 
 	clock := stopwatch.NewClock(rate)
 	hoop := func(then time.Time) {
