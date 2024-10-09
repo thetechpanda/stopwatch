@@ -6,15 +6,17 @@
 [![Release](https://img.shields.io/github/release/thetechpanda/stopwatch.svg?style=flat-square)](https://github.com/thetechpanda/stopwatch/releases)
 ![Dependencies](https://img.shields.io/badge/Go_Dependencies-_None_-green.svg)
 
-A dead simple stop watch.
+A dead simple `stopwatch`, with a sprinkle of `clock`.
 
 ## Key Features
 
-It's easy, it also offers a globally available stop watch instance initialised at package load.
+Stopwatch it's easy, offers a globally available stop watch instance initialised at package load.
+
+Clock it's easy too, but bare bone. Is not very precise.
 
 ## Motivation
 
-Needed a simple stop watch.
+Needed a simple `stopwatch`. Then I didn't know where to put `clock`.
 
 ## Usage
 
@@ -28,7 +30,18 @@ import (
 )
 
 func main() {
+	// stopwatch
     fmt.Printf("time: %s\n", stopwatch.Elapsed().String())
+
+	// clock
+	clock := stopwatch.NewClock(time.Second)
+	for i := range 1000 {
+		go func() {
+			<-clock.Tick()
+			fmt.Printf("hi from %d\n", i)
+		}()
+	}
+	// enjoy the flood
 }
 
 ```
@@ -38,6 +51,10 @@ func main() {
 ```bash
 go get github.com/thetechpanda/stopwatch
 ```
+
+## Todo
+
+- [ ] Clock benchmarks (how do I even benchmark it?)
 
 ## Contributing
 
